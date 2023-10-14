@@ -3,7 +3,7 @@
 """Module that contains the BaseModel class."""
 import uuid
 from datetime import datetime
-from models import storage
+from models.base_model import BaseModel
 
 class BaseModel:
     """Defines the BaseModel class."""
