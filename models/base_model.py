@@ -3,7 +3,7 @@
 """Module that contains the BaseModel class."""
 import uuid
 from datetime import datetime
-
+from models import storage
 
 class BaseModel:
     """Defines the BaseModel class."""
@@ -48,3 +48,18 @@ class BaseModel:
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.__dict__
         )
+
+    class BaseModel:
+    """Defines the BaseModel class."""
+
+    def __init__(self, *args, **kwargs):
+        """Initialize a new instance of the BaseModel class."""
+        # ... existing __init__ code
+
+        if not kwargs:
+            storage.new(self)
+
+    def save(self):
+        """Update the public instance attribute 'updated_at'
+        with the current datetime and call save() method of storage."""
+        storage.save()
