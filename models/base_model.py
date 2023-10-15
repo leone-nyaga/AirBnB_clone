@@ -1,56 +1,44 @@
 #!/usr/bin/python3
 # AirBnB_clone
 
-"""Module that contains the BaseModel class."""
-import uuid
+import models
+from uuid import uuid4
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
-    """Defines the BaseModel class."""
 
     def __init__(self, *args, **kwargs):
-        """Initialize a new instance of the BaseModel class."""
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == 'created_at' or key == 'updated_at':
-                    setattr(self, key, datetime.strptime
-                            (value, "%Y-%m-%dT%H:%M:%S.%f"))
-                else:
-                    setattr(self, key, value)
-        else:
-            self.id = str(uuid.uuid4())
+
+        if not kwargs:
+            self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-        if '__class__' in self.__dict__:
-                delattr(self, '__class__')
-        if not kwargs:
-            storage.new(self)
-
-    def save(self):
-        """Update the public instance attribute 'updated_at'
-        with the current datetime."""
-        self.updated_at = datetime.now()
-
-    def save(self):
-        """Update the public instance attribute 'updated_at'
-        with the current datetime and call save() method of storage."""
-        storage.save()
-
-    def to_dict(self):
-        """Return a dictionary containing all keys/values of __dict__
-        of the instance."""
-        return {
-            'id': self.id,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat(),
-            '__class__': self.__class__.__name__
-            # Add other instance attributes as needed
-        }
+            models.storage.new(self)
+        else:
+            for k, v in kwargs.items():
+                if k != "__class__":
+                    if k == "updated_at":
+                        self.updated_at = datetime.fromisoformat(v)
+                    elif k == "created_at":
+                        self.created_at = datetime.fromisoformat(v)
+                    else:
+                        setattr(self, k, v)
 
     def __str__(self):
-        """Return a string representation of the instance."""
-        return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__
-        )
+
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+
+    def save(self):
+        self.updated_at = datetime.now()
+        models.storage.save()
+
+    def to_dict(self):
+        vmdict1 = {}
+        for key, value in self.__dict__.items():
+            if key == 'created_at' or key == 'updated_at':
+                value = value.isoformat()
+            vmdict1[key] = value
+        vmdict1['__class__'] = self.__class__.__name__
+
+        return vmdict1

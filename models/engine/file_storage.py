@@ -2,45 +2,47 @@
 # AirBnB_clone
 
 import json
+import os
+from datetime import datetime
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
-    """Serializes instances to a JSON file and deserializes JSON file to instances."""
 
-    __file_path = "file.json"
+    __file_path = "./file.json"
     __objects = {}
 
+
     def all(self):
-        """Returns the dictionary __objects."""
+
         return self.__objects
 
     def new(self, obj):
-        """Sets in __objects the obj with key <obj class name>.id."""
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+
+        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
-        """Serializes __objects to the JSON file (path: __file_path)."""
-        serialized_objs = {}
-        for key, obj in self.__objects.items():
-            serialized_objs[key] = obj.to_dict()
 
-        with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(serialized_objs, file)
-
+        to_json = ""
+        dozt1 = {}
+        for key, value in self.__objects.items():
+            dozt1[key] = value.to_dict()
+        to_json = json.dumps(dozt1)
+        with open(self.__file_path, "w") as f:
+            f.write(to_json)
     def reload(self):
-        """Deserializes the JSON file to __objects."""
-        try:
-            with open(self.__file_path, 'r', encoding='utf-8') as file:
-                if file.readable():
-                    loaded_objs = json.load(file)
-                    for key, obj_dict in loaded_objs.items():
-                        class_name, obj_id = key.split('.')
-                        class_obj = globals()[class_name]
-                        new_obj = class_obj(**obj_dict)
-                        self.__objects[key] = new_obj
-        except FileNotFoundError:
-            pass
 
+        dozt1 = {}
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, "r") as f:
+                dozt1 = json.loads(f.read())
+
+            for key, obj_dict in dozt1.items():
+                cls = globals()[obj_dict['__class__']]
+                self.__objects[key] = cls(**obj_dict)
