@@ -36,7 +36,7 @@ Read or watch:
 
 + [cmd module](https://docs.python.org/3.8/library/cmd.html)
 + [cmd module in depth](https://pymotw.com/2/cmd)
-+ [packages concept page]()
++ [packages concept page](https://savanna.alxafrica.com/concepts/66)
 + [uuid module](https://docs.python.org/3.8/library/uuid.html)
 + [datetime](https://docs.python.org/3.8/library/datetime.html)
 + [unittest module](https://docs.python.org/3.8/library/unittest.html#module-unittest)
