@@ -34,16 +34,16 @@ Do you remember the Shell? It’s exactly the same but limited to a specific use
 
 Read or watch:
 
-+ cmd module
-+ cmd module in depth
-+ packages concept page
-+ uuid module
-+ datetime
-+ unittest module
-+ args/kwargs
-+ Python test cheatsheet
-+ cmd module wiki page
-+ python unittest
++ [cmd module](https://docs.python.org/3.8/library/cmd.html)
++ [cmd module in depth](https://pymotw.com/2/cmd)
++ [packages concept page]()
++ [uuid module](https://docs.python.org/3.8/library/uuid.html)
++ [datetime](https://docs.python.org/3.8/library/datetime.html)
++ [unittest module](https://docs.python.org/3.8/library/unittest.html#module-unittest)
++ [args/kwargs](https://yasoob.me/2013/08/04/args-and-kwargs-in-python-explained)
++ [Python test cheatsheet](https://www.pythonsheets.com/notes/python-tests.html)
++ [cmd module wiki page](https://wiki.python.org/moin/CmdModule)
++ [python unittest](https://realpython.com/python-testing)
 
 ## Learning Objectives
 
@@ -91,7 +91,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 + Allowed editors: vi, vim, emacs
 + All your files should end with a new line
 + All your test files should be inside a folder tests
-+ You have to use the unittest module
++ You have to use the [unittest module](https://docs.python.org/3.4/library/unittest.html#module-unittest)
 + All your test files should be python files (extension: .py)
 + All your test files and folders should start by test_
 + Your file organization in the tests folder should be the same as your project
